@@ -5,7 +5,12 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "dev": "npx nodemon src/index.js"
+    "dev": "npx nodemon src/index.js",
+    "db:init": "sequelize db:create",
+    "db:migrate": "sequelize db:migrate",
+    "db:rollback": "sequelize db:migrate:undo",
+    "make:model": "sequelize model:generate --name",
+    "make:migration": "sequelize migration:generate --name"
   },
   "author": "Sanket",
   "license": "ISC",

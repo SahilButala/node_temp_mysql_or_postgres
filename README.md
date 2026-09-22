@@ -1,5 +1,20 @@
 This is a base node js project template, which anyone can use as it has been prepared, by keeping some of the most important code principles and project management recommendations. Feel free to change anything. 
 
+// Commands
+`To create Model`
+npm run make:model -- User --attributes firstName:string,email:string
+
+`To run your migrations`
+npm run db:migrate
+
+`To undo the last migration`
+npm run db:rollback
+
+`To generate a new, empty migration file`
+npm run make:migration -- add-phone-to-users
+
+
+
 
 `src` -> Inside the src folder all the actual source code regarding the project will reside, this will not include any kind of tests. (You might want to make separate tests folder)
 
@@ -52,3 +67,7 @@ Lets take a look inside the `src` folder
  //  flow  of main code 
 
  // -->modal-->repo-->service-->controller-->routes-->main-route-file--->server file
+
+
+
+ 

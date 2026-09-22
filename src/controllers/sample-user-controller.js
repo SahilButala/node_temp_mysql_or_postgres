@@ -1,7 +1,7 @@
 const { sampleUserService } = require("../services");
 const { StatusCodes } = require("http-status-codes");
 const ApiRes = require("../utils/api-response");
-const catchAsync = require("../utils/catch-async");
+const catchAsync = require("../utils/catch-async"); 
 
 
 // controller --> controller just used to structure the output responses not logic

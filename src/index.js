@@ -11,7 +11,7 @@ const compression = require("compression")
 const cors = require("cors")
 // const xss = require("xss-clean");
 const { Limiter } = require('./validations');
-const { ConnectDataBase } = require('./db/index.js');
+const { ConnectDataBase } = require('./db/index.js'); 
 
 
 dns.setServers(["8.8.8.8", "1.1.1.1"])

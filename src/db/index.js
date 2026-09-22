@@ -2,7 +2,7 @@ const mongoodb = require("mongoose");
 const mysql = require("mysql2");
 const { Sequelize } = require("sequelize");
  
-// two db --> mongo | Mysql
+// two db --> mongo | Mysql 
 
 
 // Main function to call db base on type of db

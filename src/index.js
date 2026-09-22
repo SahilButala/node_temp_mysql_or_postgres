@@ -2,7 +2,6 @@ const express = require('express');
 
 const { ServerConfig , Logger } = require('./config');
 const apiRoutes = require('./routes/index.js');
-const { connectMONGODB } = require('./db/index.js');
 const errorHandler = require('./utils/error-handler.js');
 const mongoSanitize = require("express-mongo-sanitize");
 const morgan = require("morgan")
@@ -12,6 +11,7 @@ const compression = require("compression")
 const cors = require("cors")
 // const xss = require("xss-clean");
 const { Limiter } = require('./validations');
+const { ConnectDataBase } = require('./db/index.js');
 
 
 dns.setServers(["8.8.8.8", "1.1.1.1"])
@@ -20,7 +20,7 @@ const app = express();
 
 
 // ----------------- DATABASE ENTRY  -----------------//
-// connectMONGODB()
+ConnectDataBase()
 // ----------------- DATABASE ENTRY  -----------------//
 
 

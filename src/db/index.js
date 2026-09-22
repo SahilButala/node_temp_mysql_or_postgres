@@ -1,16 +1,22 @@
 const mongoodb = require("mongoose");
-const mysql = require("mysql2")
-
+const mysql = require("mysql2");
+const { Sequelize } = require("sequelize");
+ 
 // two db --> mongo | Mysql
 
 
 // Main function to call db base on type of db
 exports.ConnectDataBase = async () => {
-  if (process.env.DB_TYPE === "mongo") {
-    await connectMONGODB();
-  } else if (process.env.DB_TYPE === "Mysql") {
-    await connectMySQL();
-  }
+    const type = process.env.DB_TYPE;
+    if (type === "mongo") {
+        await exports.connectMONGODB();
+    } else if (type === "Mysql") {
+        await exports.connectMySQL();
+    } else if(type === "postgres"){
+        await exports.connectPostgressSql()
+    }else {
+        console.error("❌ Invalid DB_TYPE. Check your .env file.");
+    }
 };
 // Main function to call db base on type of db
 
@@ -43,10 +49,11 @@ exports.connectMONGODB = async () => {
 exports.connectMySQL = async () => {
   try {
     const connection = await mysql.createConnection({
-      host: process.env.SQL_HOST,
-      user: process.env.SQL_USER,
-      password: process.env.SQL_PASSWORD,
-      database: process.env.SQL_DATABASE,
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      port : process.env.DB_PORT
     });
 
     console.log("MySQL connected successfully...");
@@ -57,3 +64,30 @@ exports.connectMySQL = async () => {
   }
 };
 // ----------------- My SQL CONNECTION -----------------//
+
+
+// ----------------- Postgres CONNECTION -----------------//
+
+
+exports.connectPostgressSql = async () => {
+    try { 
+        const sequelize = new Sequelize(
+            process.env.DB_NAME,
+            process.env.DB_USER,
+            process.env.DB_PASSWORD,
+            {
+                host: process.env.DB_HOST,
+                port: process.env.DB_PORT || 5432,
+                dialect: "postgres",
+                logging: false,
+            }
+        );
+ 
+        await sequelize.authenticate();
+        console.log("PostgreSQL connected successfully");
+    } catch (error) {
+        console.error("PostgreSQL connection failed:", error.message);
+        process.exit(1);
+    }
+}
+
